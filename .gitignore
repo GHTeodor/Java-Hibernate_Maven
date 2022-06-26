@@ -1,0 +1,5 @@
+.idea
+Java-Hibernate_Maven.iml
+
+# Project exclude paths
+/target/
