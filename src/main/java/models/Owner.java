@@ -9,17 +9,23 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "driver")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"car"})
 @NoArgsConstructor
-public class User implements Serializable {
+public class Owner implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "driver")
     private String name;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "carId")
+    private Car car;
 
-    public User(String name) {
+    public Owner(String name, Car car) {
         this.name = name;
+        this.car = car;
     }
 }
