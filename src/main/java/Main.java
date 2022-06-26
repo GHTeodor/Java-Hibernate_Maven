@@ -39,7 +39,7 @@ public class Main {
         session.save(new Word("Grapes"));
 
         List<Word> words = session.createQuery("select w from Word w", Word.class).getResultList();
-        System.out.println(words);
+        System.out.println("\033[45m" + words + "\033[0m");
 
         session.getTransaction().commit();
         // 2
@@ -50,7 +50,9 @@ public class Main {
         session.save(new Owner("Letty Ortiz", new Car("Lykan HyperSport", Type.ROADSTER, 750, 30000, 2013)));
         session.save(new Owner("Mia Toretto", new Car("Lamborghini Murcielago", Type.CABRIOLET, 640, 35000, 2001)));
 
+        System.out.print("\033[42m");
         session.createNativeQuery("select * from driver", Owner.class).getResultList().forEach(System.out::println);
+        System.out.print("\033[0m");
 
         session.getTransaction().commit();
         session.close();
