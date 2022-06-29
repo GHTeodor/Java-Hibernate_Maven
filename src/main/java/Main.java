@@ -35,16 +35,16 @@ public class Main {
 
         session.save(new Owner("Dominic Toretto",
                 Arrays.asList(new Car("Dodge Charger SRT Hellcat", Type.SEDAN, 717, 15000, 1970),new Car()),
-                new DriverLicense("SD")));
+                new DriverLicense("SS")));
         session.save(new Owner("Brian O'Conner",
                 Arrays.asList(new Car("Pontiac Fiero", Type.SEDAN, 700, 15000, 2003),new Car()),
-                new DriverLicense("SD")));
+                new DriverLicense("HG")));
         session.save(new Owner("Letty Ortiz",
                 Arrays.asList(new Car("Lykan HyperSport", Type.ROADSTER, 750, 30000, 2013),new Car()),
-                new DriverLicense("SD")));
+                new DriverLicense("RP")));
         session.save(new Owner("Mia Toretto",
                 Arrays.asList(new Car("Lamborghini Murcielago", Type.CABRIOLET, 640, 35000, 2001),new Car()),
-                new DriverLicense("SD")));
+                new DriverLicense("SK")));
 
         session.getTransaction().commit();
 
