@@ -23,22 +23,32 @@ public class User implements Serializable {
     @JoinColumn(name = "passport_id")
     @ToString.Exclude
     private Passport passport;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_cards",
+            name = "user_card",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "card_id")
     )
-    @ToString.Exclude
     private List<Card> cards;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_sg",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "sg_id")
+    )
+    private List<Sunglass> sunglasses;
 
     public User(String name) {
         this.name = name;
     }
 
-    public User(String name, Passport passport, List<Card> cards) {
+    public User(String name, Passport passport) {
         this.name = name;
         this.passport = passport;
-        this.cards = cards;
+    }
+
+    public User(String name, List<Sunglass> sunglasses) {
+        this.name = name;
+        this.sunglasses = sunglasses;
     }
 }

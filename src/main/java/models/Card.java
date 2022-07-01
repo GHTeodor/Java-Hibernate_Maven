@@ -18,15 +18,20 @@ public class Card implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private long number;
-    @ToString.Exclude
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_cards",
-    joinColumns = @JoinColumn(name = "card_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id"))
+            name = "user_card",
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private User user;
 
     public Card(long number) {
         this.number = number;
+    }
+
+    public Card(long number, User user) {
+        this.number = number;
+        this.user = user;
     }
 }

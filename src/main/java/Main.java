@@ -1,5 +1,6 @@
 import models.Card;
 import models.Passport;
+import models.Sunglass;
 import models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,6 +23,7 @@ public class Main {
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Passport.class)
                 .addAnnotatedClass(Card.class)
+                .addAnnotatedClass(Sunglass.class)
                 .getMetadataBuilder()
                 .build();
 
@@ -32,25 +34,28 @@ public class Main {
         Session session = sessionFactory.openSession();
 
         session.beginTransaction();
+//        User vivaldi = new User("Vivaldi");
+//        System.out.println(vivaldi);
+//        Card card1 = new Card(1234567890123456789L, vivaldi);
+//        System.out.println(vivaldi);
+//        Card card2 = new Card(987654321098765432L, vivaldi);
+//        System.out.println(vivaldi);
+//        session.save(card1);
+//        session.save(card2);
+//        System.out.println(vivaldi);
 
-        session.save(new User("Olya", new Passport("SD"),
-                Arrays.asList(new Card(1234567890123456789L), new Card(987654321098765432L))));
-        session.save(new User("Kolya", new Passport("SK"),
-                Arrays.asList(new Card(1234567890987654321L), new Card(987654321012345678L))));
-        session.save(new User("Petya", new Passport("HS"),
-                Arrays.asList(new Card(1234567890012345678L), new Card(987654321001234567L))));
-        session.save(new User("Vasya", new Passport("DT"),
-                Arrays.asList(new Card(1234567890123456798L), new Card(987654321012345679L))));
+//        User user = new User("Riko", Arrays.asList(new Sunglass("Sokoban"), new Sunglass("RayBan")));
+//        session.save(user);
+//        System.out.println(user);
+
+        List<Sunglass> sunglasses = Arrays.asList(new Sunglass("Sokoban"), new Sunglass("RayBan"));
+        User user1 = new User("Rick", sunglasses);
+        User user2 = new User("Morty", sunglasses);
+        session.save(user1);
+        session.save(user2);
+        System.out.println(user1 + "\n" + user2);
 
         session.getTransaction().commit();
-
-        List<Passport> passports = session.createQuery("select p from Passport p", Passport.class).getResultList();
-        passports.forEach(System.out::println);
-
-        List<User> users = session.createQuery("select u from User u", User.class).getResultList();
-        users.forEach(user -> System.out.println(user + "" + user.getCards()));
-
-        session.createQuery("select c.user from Card c", User.class).getResultList().forEach(System.out::println);
 
         session.close();
         sessionFactory.close();
