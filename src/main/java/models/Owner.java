@@ -27,9 +27,24 @@ public class Owner implements Serializable {
     @JoinColumn(name = "licence_id")
     private DriverLicense driverLicense;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "drivers_colours",
+            joinColumns = @JoinColumn(name = "driver_id"),
+            inverseJoinColumns = @JoinColumn(name = "colour_id")
+    )
+    private List<Colour> colours;
+
     public Owner(String name, List<Car> cars, DriverLicense driverLicense) {
         this.name = name;
         this.cars = cars;
         this.driverLicense = driverLicense;
+    }
+
+    public Owner(String name, List<Car> cars, DriverLicense driverLicense, List<Colour> colours) {
+        this.name = name;
+        this.cars = cars;
+        this.driverLicense = driverLicense;
+        this.colours = colours;
     }
 }
